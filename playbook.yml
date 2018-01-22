@@ -4,4 +4,7 @@
 
   tasks:
 
-      - include : tasks/device-check.yml
+      - import_tasks : tasks/device-check.yml
+
+      # Optimizations
+      - import_tasks : tasks/rpi3/device-optimizations.yml
