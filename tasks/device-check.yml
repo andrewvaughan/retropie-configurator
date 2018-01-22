@@ -1,0 +1,16 @@
+# Checks for device compatibility
+---
+- name     : Checking Device File
+  stat     :
+    path   : /proc/device-tree/model
+  register : device_proc
+
+- name  : Checkpoint
+  fail  :
+    msg : Could not load device tree model to confirm device. Exiting.
+  when  : not device_proc.stat.rusr
+
+- name  : Device Compatibility Check
+  fail  :
+    msg : "This script is not compatible with any system other than the Raspberry Pi 3 (Current: \"{{lookup('file', '/proc/device-tree/model') }}\")"
+  when  : "\"Raspberry Pi 3\" not in \"{{lookup('file', '/proc/device-tree/model') }}\""
