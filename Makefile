@@ -2,15 +2,19 @@ all:
 	./configurator
 
 playbook:
-	ansible-playbook -i inventory --su-user="pi" playbook.yml
+	ansible-playbook --ask-become-pass playbook.yml
 
 debug-playbook:
-	ansible-playbook -v -i inventory --su-user="pi" playbook.yml
+	ansible-playbook -v --ask-become-pass playbook.yml
 
 test: dependencies
 	# @TODO - run docker retropie test
 
 dependencies:
+	apt-get -y update
+	apt-get install -y software-properties-common
+	apt-add-repository ppa:ansible/ansible
+	apt-get -y update
 	apt-get install -y git ansible
 
 changelog:

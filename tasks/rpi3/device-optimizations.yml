@@ -1,0 +1,41 @@
+# Optimizations for the Raspberry Pi 3
+---
+- name      : Setting Overclock ARM Frequency
+  become    : true
+  ini_file  :
+    dest    : /boot/config.txt
+    section : null
+    option  : arm_freq
+    value   : 1300
+
+- name      : Setting Overclock GPU Frequency
+  become    : true
+  ini_file  :
+    dest    : /boot/config.txt
+    section : null
+    option  : gpu_freq
+    value   : 500
+
+- name      : Setting Overclock SDRAM Frequency
+  become    : true
+  ini_file  :
+    dest    : /boot/config.txt
+    section : null
+    option  : sdram_freq
+    value   : 500
+
+- name      : Setting Overclock Over Voltage
+  become    : true
+  ini_file  :
+    dest    : /boot/config.txt
+    section : null
+    option  : over_voltage
+    value   : 6
+
+- name      : Setting Overclock V3D Frequency
+  become    : true
+  ini_file  :
+    dest    : /boot/config.txt
+    section : null
+    option  : v3d_freq
+    value   : 525
