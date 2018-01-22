@@ -2,7 +2,10 @@ all:
 	./configurator
 
 playbook:
-	ansible-playbook -v -i inventory --su-user="pi" --extra-vars "device_model=$(cat /proc/device-tree/model)" playbook.yml
+	ansible-playbook -i inventory --su-user="pi" playbook.yml
+
+debug-playbook:
+	ansible-playbook -v -i inventory --su-user="pi" playbook.yml
 
 test: dependencies
 	# @TODO - run docker retropie test

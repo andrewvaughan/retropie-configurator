@@ -96,17 +96,6 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 
-# Store the RaspberryPi Model
-debug "Gathering device model information"
-if [ ! -f /proc/device-tree/model ]; then
-    echo -e "${BOLD}${RED}Could not determine RaspberryPi model. Exiting.${RESET}"
-    exit 1
-fi
-
-DEVICE_MODEL=$(cat /proc/device-tree/model)
-debug "Device model determined to be \"${DEVICE_MODEL}\""
-
-
 # Install dependencies
 echo -e "${BOLD}${UNDERLINE}Installing dependencies (this might take a moment)...${RESET}"
 echo ""
@@ -129,7 +118,7 @@ VERBOSITY=""
 if [ $OPT_DEBUG -eq 1 ]; then VERBOSITY="-v"; fi
 if [ $OPT_VERBOSE -eq 1 ]; then VERBOSITY="-vv"; fi
 
-ansible-playbook $VERBOSITY -i inventory --su-user="${RETROPIE_USER}" --extra-vars "device_model=${DEVICE_MODEL}" playbook.yml
+ansible-playbook $VERBOSITY -i inventory --su-user="${RETROPIE_USER}" playbook.yml
 
 
 # Clean dependencies
