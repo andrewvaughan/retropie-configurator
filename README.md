@@ -1,4 +1,4 @@
-# RetroPie Optimizer
+# RetroPie Configurator
 
 This script will configure a standard [RetroPie][retropie] installation to performant settings as they are discovered.
 
@@ -12,7 +12,7 @@ This project is in no way related to the RetroPie creators or organization.  It 
 To run this script, simply SSH into your RetroPie device and run the following command:
 
 ```bash
-curl -s https://raw.githubusercontent.com/andrewvaughan/retropie-optimizer/master/optimizer | sudo bash -s --
+curl -s https://raw.githubusercontent.com/andrewvaughan/retropie-configurator/master/configurator | sudo bash -s --
 ```
 
 You may be asked for a password, which will be the password for your user (`raspberry` for default `pi` users).
@@ -24,7 +24,7 @@ For instance, to print the usage instructions and help information for the scrip
 command would look like this:
 
 ```bash
-curl -s https://raw.githubusercontent.com/andrewvaughan/retropie-optimizer/master/optimizer | sudo bash -s -- -h
+curl -s https://raw.githubusercontent.com/andrewvaughan/retropie-configurator/master/configurator | sudo bash -s -- -h
 ```
 
 The following options exist for your use:
@@ -75,6 +75,6 @@ SOFTWARE.
 ```
 
 
-[project-license]: https://github.com/andrewvaughan/retropie-optimizer/blob/master/LICENSE
+[project-license]: https://github.com/andrewvaughan/retropie-configurator/blob/master/LICENSE
 [semver-url]:      [semver-url]: http://semver.org/
 [retropie]:        https://retropie.org.uk/

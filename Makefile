@@ -1,5 +1,5 @@
 all:
-	./optimizer
+	./configurator
 
 playbook:
 	ansible-playbook -v -i inventory --su-user="pi" --extra-vars "device_model=$(cat /proc/device-tree/model)" playbook.yml
@@ -16,14 +16,14 @@ changelog:
 
 	$(info Changelog for $(TAG1)$(TAG2):)
 	$(info )
-	@git log $(TAG1)$(TAG2) --no-merges --reverse --pretty=format:'- [view](https://github.com/andrewvaughan/retropie-optimizer/commit/%H) &bull; %s'
+	@git log $(TAG1)$(TAG2) --no-merges --reverse --pretty=format:'- [view](https://github.com/andrewvaughan/retropie-configurator/commit/%H) &bull; %s'
 
 clean: clean-container
 	-find . -name '*.retry' -exec rm -f {} +
-	-docker rmi andrewvaughan/retropie-optimizer-test
+	-docker rmi andrewvaughan/retropie-configurator-test
 
 clean-container:
-	-docker stop retropie-optimizer-test
-	-docker rm retropie-optimizer-test
+	-docker stop retropie-configurator-test
+	-docker rm retropie-configurator-test
 
 .PHONY: all playbook test dependencies changelog clean clean-container
