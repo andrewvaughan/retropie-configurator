@@ -4,6 +4,4 @@
 
   tasks:
 
-      - debug:
-          msg       : "Playbook loaded"
-          verbosity : 1
+      - include : tasks/device-check.yml
