@@ -1,0 +1,149 @@
+#!/bin/bash
+
+BOLD="\e[1m"
+ITALIC="\e[3m"
+UNDERLINE="\e[4m"
+RESET="\e[0m"
+RED="\e[91m"
+
+# Usage function for help and bad arguments
+usage() {
+  echo -e ""
+  echo -e "${BOLD}${UNDERLINE}RetroPie Optimizer${RESET}"
+  echo -e ""
+  echo -e "  Configures a RetroPie installation for compatibility and"
+  echo -e "  performance."
+  echo -e ""
+  echo -e "  This script makes changes that may cause ${BOLD}${UNDERLINE}irreparable damage${RESET}"
+  echo -e "  to your configurations and hardware.  ${BOLD}Do not${RESET} use this script"
+  echo -e "  unless you are ${BOLD}fully${RESET} aware of what it does and are willing to"
+  echo -e "  accept the consequences of your actions."
+  echo -e ""
+  echo -e "  ${ITALIC}No liability or warranty is provided, of any kind, for what"
+  echo -e "  using this script might do to your system.  You are responsible"
+  echo -e "  for ensuring that any changes made are within your agreements"
+  echo -e "  and warranty.${RESET}"
+  echo -e ""
+  echo -e "  For more information visit:"
+  echo -e ""
+  echo -e "  ${UNDERLINE}https://github.com/andrewvaughan/retropie-optimizer${RESET}"
+  echo -e ""
+  echo -e "${BOLD}${UNDERLINE}Usage${RESET}"
+  echo -e ""
+  echo -e "  optimizer [-h] [-d] [-v] [-u user] [-c]"
+  echo -e ""
+  echo -e "${BOLD}${UNDERLINE}Options${RESET}"
+  echo -e ""
+  echo -e "  -h, --help        Prints usage guidelines and help."
+  echo -e "  -d, --debug       Turns on debugging messages"
+  echo -e "  -v, --verbose     Turns on verbose debugging messages; implies -d"
+  echo -e "  -u, --user USER   Sets the user that is running RetroPie (default: pi)"
+  echo -e "  -c, --clean       Clean up packages after installation (default: off; this may uninstall packages you wish to keep on your system)"
+  echo -e ""
+}
+
+debug() {
+  if [[ $OPT_DEBUG -eq 1 ]]; then
+    echo -e "${BOLD}${UNDERLINE}[DEBUG]${RESET} ${ITALIC}$1${RESET}";
+  fi
+}
+
+
+# Script Configurations
+APT_DEPENDENCIES="git=1:2.1.4-2.1+deb8u5 ansible=1.7.2+dfsg-2"
+
+# User Configurations
+OPT_DEBUG=0
+OPT_VERBOSE=0
+OPT_USER="pi"         # The user that runs RetroPie (Default: pi)
+OPT_CLEAN=0
+
+# Parse any arguments
+while [ "$1" != "" ]; do
+  case $1 in
+
+    -d | --debug)    OPT_DEBUG=1
+                     ;;
+
+    -v | --verbose)  OPT_DEBUG=1
+                     OPT_VERBOSE=1
+                     ;;
+
+    -u | --user )    shift
+                     OPT_USER=$1
+                     ;;
+
+    -c | --clean )   OPT_CLEANUP=1
+                     ;;
+
+    -h | --help )    usage
+                     exit
+                     ;;
+
+    * )              usage
+                     exit 1
+
+    esac
+    shift
+done
+
+
+# Ensure the script is being run as root
+debug "Checking that script is being run as root"
+if [[ $EUID -ne 0 ]]; then
+   echo -e "${BOLD}${RED}This script must be run as root. Exiting.${RESET}"
+   exit 1
+fi
+
+
+# Store the RaspberryPi Model
+debug "Gathering device model information"
+if [ ! -f /proc/device-tree/model ]; then
+    echo -e "${BOLD}${RED}Could not determine RaspberryPi model. Exiting.${RESET}"
+    exit 1
+fi
+
+DEVICE_MODEL=$(cat /proc/device-tree/model)
+debug "Device model determined to be \"${DEVICE_MODEL}\""
+
+
+# Install dependencies
+echo -e "${BOLD}${UNDERLINE}Installing dependencies (this might take a moment)...${RESET}"
+echo ""
+debug "Packages: (${APT_DEPENDENCIES})"
+apt-get -o Dpkg::Progress-Fancy="1" install -y ${APT_DEPENDENCIES}
+
+RUN_DIR=$(mktemp -d)
+debug "Working directory set as \"${RUN_DIR}\""
+
+debug "Downloading playbook repository..."
+cd "${RUN_DIR}"
+git clone https://github.com/andrewvaughan/retropie-optimizer.git ./
+ls -alh
+
+
+# Launch Ansible script
+debug "Launching configuration script"
+
+VERBOSITY=""
+if [ $OPT_DEBUG -eq 1 ]; then VERBOSITY="-v"; fi
+if [ $OPT_VERBOSE -eq 1 ]; then VERBOSITY="-vv"; fi
+
+ansible-playbook $VERBOSITY -i inventory --su-user="${RETROPIE_USER}" --extra-vars "device_model=${DEVICE_MODEL}" playbook.yml
+
+
+# Clean dependencies
+if [ $OPT_CLEAN -eq 1 ]; then
+  echo -e "${BOLD}${UNDERLINE}Cleaning package dependencies...${RESET}"
+  echo ""
+  apt-get -o Dpkg::Progress-Fancy="1" remove -y ${APT_DEPENDENCIES}
+fi
+
+
+# Updates:
+#    - TODO Installs proper vim
+#    - TODO Configures vim via ~/.vimrc
+#    - TODO Sets default keyboard from UK to US style
+#    - TODO Sets overclocking for RaspberryPi 3
+#    - TODO Sets the CPU governor to performance mode
+#    - TODO Remaps Retrolink Controllers
