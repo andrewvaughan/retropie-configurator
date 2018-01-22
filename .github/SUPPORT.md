@@ -24,8 +24,8 @@ If you wish to contribute to the project, we recommend reading the [contribution
 [readme][readme] to learn more about the purpose and standards for the project.
 
 
-[readme]:             https://github.com/andrewvaughan/retropie-optimizer/blob/master/README.md
-[contributing]:       https://github.com/andrewvaughan/retropie-optimizer/blob/master/CONTRIBUTING.md
-[contributing-issue]: https://github.com/andrewvaughan/retropie-optimizer/blob/master/CONTRIBUTING.md#ways-to-contribute
+[readme]:             https://github.com/andrewvaughan/retropie-configurator/blob/master/README.md
+[contributing]:       https://github.com/andrewvaughan/retropie-configurator/blob/master/CONTRIBUTING.md
+[contributing-issue]: https://github.com/andrewvaughan/retropie-configurator/blob/master/CONTRIBUTING.md#ways-to-contribute
 
-[issues]:             https://github.com/andrewvaughan/retropie-optimizer/issues
+[issues]:             https://github.com/andrewvaughan/retropie-configurator/issues
