@@ -4,7 +4,9 @@ BOLD="\e[1m"
 ITALIC="\e[3m"
 UNDERLINE="\e[4m"
 RESET="\e[0m"
-RED="\e[91m"
+BG_RED="\e[41m"
+BG_GREEN="\e[42m"
+BG_YELLOW="\e[43m"
 
 # Usage function for help and bad arguments
 usage() {
@@ -38,25 +40,47 @@ usage() {
   echo -e "  -d, --debug       Turns on debugging messages"
   echo -e "  -v, --verbose     Turns on verbose debugging messages; implies -d"
   echo -e "  -u, --user USER   Sets the user that is running RetroPie (default: pi)"
-  echo -e "  -c, --clean       Clean up packages after installation (default: off; this may uninstall packages you wish to keep on your system)"
   echo -e ""
+}
+
+println() {
+  local line=$1 style=$2
+  local width=$(tput cols)
+
+  while (( ${#line} < width )); do
+    line+=" "
+  done
+
+  echo -e "${style}${line}${RESET}"
+}
+
+error() {
+  echo ""
+  println "[ERROR] $1" "${BOLD}${UNDERLINE}${BG_RED}"
+  echo ""
+}
+
+info() {
+  echo ""
+  println "$1" "${BOLD}${UNDERLINE}${BG_GREEN}"
+  echo ""
 }
 
 debug() {
   if [[ $OPT_DEBUG -eq 1 ]]; then
-    echo -e "${BOLD}${UNDERLINE}[DEBUG]${RESET} ${ITALIC}$1${RESET}";
+    echo ""
+    println "[DEBUG] $1" "${BOLD}${UNDERLINE}${BG_YELLOW}"
+    echo ""
   fi
 }
 
 
 # Script Configurations
-APT_DEPENDENCIES="git=1:2.1.4-2.1+deb8u5 ansible=1.7.2+dfsg-2"
 
-# User Configurations
-OPT_DEBUG=0
+# Configuration Flags
+OPT_DEBUG=0           # Debugging flags
 OPT_VERBOSE=0
 OPT_USER="pi"         # The user that runs RetroPie (Default: pi)
-OPT_CLEAN=0
 
 # Parse any arguments
 while [ "$1" != "" ]; do
@@ -71,9 +95,6 @@ while [ "$1" != "" ]; do
 
     -u | --user )    shift
                      OPT_USER=$1
-                     ;;
-
-    -c | --clean )   OPT_CLEANUP=1
                      ;;
 
     -h | --help )    usage
@@ -91,16 +112,32 @@ done
 # Ensure the script is being run as root
 debug "Checking that script is being run as root"
 if [[ $EUID -ne 0 ]]; then
-   echo -e "${BOLD}${RED}This script must be run as root. Exiting.${RESET}"
+   error "This script must be run as root. Exiting."
    exit 1
 fi
 
 
 # Install dependencies
-echo -e "${BOLD}${UNDERLINE}Installing dependencies (this might take a moment)...${RESET}"
-echo ""
-debug "Packages: (${APT_DEPENDENCIES})"
-apt-get -o Dpkg::Progress-Fancy="1" install -y ${APT_DEPENDENCIES}
+info "Installing dependencies (this might take a moment)..."
+
+apt-get -y update
+apt-get install -o Dpkg::Progress-Fancy="1" -y libssl-dev build-essential libffi-dev python-dev python3-dev python-pip git
+apt-get -y autoremove
+
+pip install --upgrade pip setuptools
+pip install --upgrade ansible
+
+if [ $OPT_DEBUG -eq 1 ]; then
+  python --version
+  pip --version
+  ansible --version
+  git --version
+fi
+
+debug "Updating \"/etc/ansible/ansible.cfg\" to latest from source control"
+mkdir -p /etc/ansible
+rm -rf /etc/ansible/ansible.cfg
+curl https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg > /etc/ansible/ansible.cfg
 
 RUN_DIR=$(mktemp -d)
 debug "Working directory set as \"${RUN_DIR}\""
@@ -108,31 +145,28 @@ debug "Working directory set as \"${RUN_DIR}\""
 debug "Downloading playbook repository..."
 cd "${RUN_DIR}"
 git clone https://github.com/andrewvaughan/retropie-configurator.git ./
-ls -alh
+
+if [ $OPT_DEBUG -eq 1 ]; then
+  pwd
+  ls -alh
+fi
 
 
 # Launch Ansible script
-debug "Launching configuration script"
+info "Running configuration script; you may be asked for the user's password (e.g., raspberry)..."
 
 VERBOSITY=""
 if [ $OPT_DEBUG -eq 1 ]; then VERBOSITY="-v"; fi
 if [ $OPT_VERBOSE -eq 1 ]; then VERBOSITY="-vv"; fi
 
-ansible-playbook $VERBOSITY -i inventory --su-user="${RETROPIE_USER}" playbook.yml
-
-
-# Clean dependencies
-if [ $OPT_CLEAN -eq 1 ]; then
-  echo -e "${BOLD}${UNDERLINE}Cleaning package dependencies...${RESET}"
-  echo ""
-  apt-get -o Dpkg::Progress-Fancy="1" remove -y ${APT_DEPENDENCIES}
-fi
+#ansible-playbook $VERBOSITY -i inventory --su-user="${RETROPIE_USER}" --ask-sudo-pass playbook.yml
+ansible-playbook $VERBOSITY --ask-become-pass playbook.yml
 
 
 # Updates:
 #    - TODO Installs proper vim
 #    - TODO Configures vim via ~/.vimrc
-#    - TODO Sets default keyboard from UK to US style
+#    - TODO
 #    - TODO Sets overclocking for RaspberryPi 3
 #    - TODO Sets the CPU governor to performance mode
 #    - TODO Remaps Retrolink Controllers
