@@ -9,7 +9,7 @@ RED="\e[91m"
 # Usage function for help and bad arguments
 usage() {
   echo -e ""
-  echo -e "${BOLD}${UNDERLINE}RetroPie Optimizer${RESET}"
+  echo -e "${BOLD}${UNDERLINE}RetroPie Configurator${RESET}"
   echo -e ""
   echo -e "  Configures a RetroPie installation for compatibility and"
   echo -e "  performance."
@@ -26,11 +26,11 @@ usage() {
   echo -e ""
   echo -e "  For more information visit:"
   echo -e ""
-  echo -e "  ${UNDERLINE}https://github.com/andrewvaughan/retropie-optimizer${RESET}"
+  echo -e "  ${UNDERLINE}https://github.com/andrewvaughan/retropie-configurator${RESET}"
   echo -e ""
   echo -e "${BOLD}${UNDERLINE}Usage${RESET}"
   echo -e ""
-  echo -e "  optimizer [-h] [-d] [-v] [-u user] [-c]"
+  echo -e "  configurator [-h] [-d] [-v] [-u user] [-c]"
   echo -e ""
   echo -e "${BOLD}${UNDERLINE}Options${RESET}"
   echo -e ""
@@ -118,7 +118,7 @@ debug "Working directory set as \"${RUN_DIR}\""
 
 debug "Downloading playbook repository..."
 cd "${RUN_DIR}"
-git clone https://github.com/andrewvaughan/retropie-optimizer.git ./
+git clone https://github.com/andrewvaughan/retropie-configurator.git ./
 ls -alh
 
 
