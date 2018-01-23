@@ -1,0 +1,35 @@
+# Optimizations specific to the Glide N64 emulator
+---
+
+- name  : Glide N64 Optimization
+  block :
+
+    - name      : Setting Texture Cache to 900MB for Glide N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-GLideN64
+        option  : CacheSize
+        value   : 900
+
+    - name      : Enabling N64 Depth Compare Instead of OpenGL for Glide N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-GLideN64
+        option  : EnableN64DepthCompare
+        value   : True
+
+    - name      : Setting High Resolution Textures (If Available) for Glide N64
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-GLideN64
+        option  : txHiresEnable
+        value   : True
+
+    - name      : Allowing Use of Alpha Channel on High Resolution Textures for Glide N64
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-GLideN64
+        option  : txHiresFullAlphaChannel
+        value   : True
+
+  when : not skip_n64_glide|default(retropie_defaults.skip_n64_glide)
