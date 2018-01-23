@@ -159,14 +159,4 @@ VERBOSITY=""
 if [ $OPT_DEBUG -eq 1 ]; then VERBOSITY="-v"; fi
 if [ $OPT_VERBOSE -eq 1 ]; then VERBOSITY="-vv"; fi
 
-#ansible-playbook $VERBOSITY -i inventory --su-user="${RETROPIE_USER}" --ask-sudo-pass playbook.yml
-ansible-playbook $VERBOSITY --ask-become-pass playbook.yml
-
-
-# Updates:
-#    - TODO Installs proper vim
-#    - TODO Configures vim via ~/.vimrc
-#    - TODO
-#    - TODO Sets overclocking for RaspberryPi 3
-#    - TODO Sets the CPU governor to performance mode
-#    - TODO Remaps Retrolink Controllers
+ansible-playbook $VERBOSITY -K playbook.yml
