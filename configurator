@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="0.0.0"
+VERSION="0.1.0"
 
 BOLD="\e[1m"
 ITALIC="\e[3m"
@@ -43,7 +43,6 @@ usage() {
   echo -e "      --version     Prints the Configurator version and exits"
   echo -e "  -d, --debug       Turns on debugging messages"
   echo -e "  -v, --verbose     Turns on verbose debugging messages; implies -d"
-  echo -e "  -u, --user USER   Sets the user that is running RetroPie (default: pi)"
   echo -e "      --no-reboot   Prevents the script from rebooting the device when complete"
   echo -e ""
   echo -e "${BOLD}${UNDERLINE}Section Skipping${RESET}"
@@ -97,7 +96,6 @@ debug() {
 # Configuration Flags
 OPT_DEBUG=0           # Debugging flags
 OPT_VERBOSE=0
-OPT_USER="pi"         # The user that runs RetroPie (Default: pi)
 OPT_SKIPS=""          # Sections to skip during the run
 
 # Parse any arguments
@@ -109,10 +107,6 @@ while [ "$1" != "" ]; do
 
     -v | --verbose)  OPT_DEBUG=1
                      OPT_VERBOSE=1
-                     ;;
-
-    -u | --user )    shift
-                     OPT_USER=$1
                      ;;
 
     --no-reboot )    OPT_SKIPS="${OPT_SKIPS} no_reboot=true"
