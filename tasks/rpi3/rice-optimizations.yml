@@ -1,0 +1,35 @@
+# Optimizations specific to the Rice N64 emulator
+---
+
+- name  : Rice N64 Optimization
+  block :
+
+    - name      : Setting Fast Texture Loading for Rice N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-Rice
+        option  : FastTextureLoading
+        value   : True
+
+    - name      : Improving Render to Texture Ratio for Rice N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-Rice
+        option  : DoubleSizeForSmallTxtrBuf
+        value   : True
+
+    # - name      : Adding Full Emulation to Texture Memory for Rice N64 Performance    # Untested and unproven
+    #   ini_file  :
+    #     dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+    #     section : Video-Rice
+    #     option  : FullTMEMEmulation
+    #     value   : False
+
+    - name      : Turning on Widescreen Hack for Rice N64 Emulator
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/mupen64plus.cfg
+        section : Video-Rice
+        option  : WideScreenHack
+        value   : True
+
+  when : not skip_n64_rice|default(retropie_defaults.skip_n64_rice)

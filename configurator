@@ -49,6 +49,7 @@ usage() {
   echo -e "  --skip-os-packages           Skips updating and upgrading Raspbian distribution packages"
   echo -e "  --skip-locales               Skips setting the locales and keyboard to US UTF-8"
   echo -e "  --skip-retroarch             Skips optimizing RetroArch emulators"
+  echo -e "  --skip-n64-rice              Skips optimizing the Rice N64 emulator"
   echo -e ""
 }
 
@@ -123,7 +124,8 @@ while [ "$1" != "" ]; do
                                  ;;
     --skip-retroarch )           OPT_SKIPS="${OPT_SKIPS} skip_retroarch=true"
                                  ;;
-
+    --skip-n64-rice )            OPT_SKIPS="${OPT_SKIPS} skip_n64_rice=true"
+                                ;;
 
     * )              usage
                      exit 1

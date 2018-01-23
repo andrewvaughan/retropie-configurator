@@ -16,3 +16,4 @@ retropie_defaults:
 
   # Optimization Groups
   skip_retroarch           : false   # Skips RetroArch optimizations when true
+  skip_n64_rice            : false   # Skips N64 Rice optimizations when true

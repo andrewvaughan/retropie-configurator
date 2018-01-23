@@ -47,6 +47,7 @@ Additionally, a number of options are made available that allow you to skip any 
 | `--skip-os-packages`         | Skips updating and upgrading Raspbian distribution packages         |
 | `--skip-locales`             | Skips setting the locales and keyboard to US UTF-8                  |
 | `--skip-retroarch`           | Skips optimizing RetroArch emulators                                |
+| `--skip-n64-rice`            | Skips optimizing the Rice N64 emulator                              |
 
 ## Release Policy
 
