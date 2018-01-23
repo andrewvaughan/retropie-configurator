@@ -1,0 +1,36 @@
+# Optimizations specific to the RetroArch frontend
+---
+
+# Updates for RetroArch Cores (lr- cores)
+- name  : RetroArch Optimization
+  block :
+
+    - name      : Configuring Threaded Video Drivers for RetroArch N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/all/retroarch.cfg
+        section : null
+        option  : video_threaded
+        value   : true
+
+    - name      : Removing Bilinear Filter from RetroArch N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/all/retroarch.cfg
+        section : null
+        option  : video_smooth
+        value   : false
+
+    - name      : Setting Audio Driver Backend for RetroArch N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/all/retroarch.cfg
+        section : null
+        option  : audio_driver
+        value   : alsathread
+
+    - name      : Disabling Rewinding for RetroArch N64 Performance
+      ini_file  :
+        dest    : /opt/retropie/configs/all/retroarch.cfg
+        section : null
+        option  : rewind_enable
+        value   : false
+
+  when : not skip_retroarch|default(retropie_defaults.skip_retroarch)

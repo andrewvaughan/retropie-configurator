@@ -1,157 +1,162 @@
 # Manages locale settings for Raspbian devices
 ---
 
-# Set all Locales to their US equivalents
-- name       : Disabling GB Locale
-  locale_gen :
-    name     : en_GB.UTF-8
-    state    : absent
+- name  : Operating System Packages
+  block :
 
-- name       : Enabling US Locale
-  locale_gen :
-    name     : en_US.UTF-8
-    state    : present
+    # General locales
+    - name       : Disabling GB Locale
+      locale_gen :
+        name     : en_GB.UTF-8
+        state    : absent
 
-- name      : Setting Master Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LANG
-    value   : en_US.UTF-8
+    - name       : Enabling US Locale
+      locale_gen :
+        name     : en_US.UTF-8
+        state    : present
 
-- name      : Setting Language Locale US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LANGUAGE
-    value   : en_US:en
+    - name      : Setting Master Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LANG
+        value   : en_US.UTF-8
 
-- name      : Setting Character Handling Locale US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_CTYPE
-    value   : "en_US.UTF-8"
+    - name      : Setting Language Locale US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LANGUAGE
+        value   : en_US:en
 
-- name      : Setting Numeric Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_NUMERIC
-    value   : "en_US.UTF-8"
+    - name      : Setting Character Handling Locale US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_CTYPE
+        value   : "en_US.UTF-8"
 
-- name      : Setting Time Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_TIME
-    value   : "en_US.UTF-8"
+    - name      : Setting Numeric Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_NUMERIC
+        value   : "en_US.UTF-8"
 
-- name      : Setting Collate Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_COLLATE
-    value   : "en_US.UTF-8"
+    - name      : Setting Time Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_TIME
+        value   : "en_US.UTF-8"
 
-- name      : Setting Monetary Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_MONETARY
-    value   : "en_US.UTF-8"
+    - name      : Setting Collate Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_COLLATE
+        value   : "en_US.UTF-8"
 
-- name      : Setting Messages Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_MESSAGES
-    value   : "en_US.UTF-8"
+    - name      : Setting Monetary Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_MONETARY
+        value   : "en_US.UTF-8"
 
-- name      : Setting Paper Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_PAPER
-    value   : "en_US.UTF-8"
+    - name      : Setting Messages Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_MESSAGES
+        value   : "en_US.UTF-8"
 
-- name      : Setting Name Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_NAME
-    value   : "en_US.UTF-8"
+    - name      : Setting Paper Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_PAPER
+        value   : "en_US.UTF-8"
 
-- name      : Setting Address Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_ADDRESS
-    value   : "en_US.UTF-8"
+    - name      : Setting Name Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_NAME
+        value   : "en_US.UTF-8"
 
-- name      : Setting Telephone Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_TELEPHONE
-    value   : "en_US.UTF-8"
+    - name      : Setting Address Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_ADDRESS
+        value   : "en_US.UTF-8"
 
-- name      : Setting Measurement Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_MEASUREMENT
-    value   : "en_US.UTF-8"
+    - name      : Setting Telephone Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_TELEPHONE
+        value   : "en_US.UTF-8"
 
-- name      : Setting Identification Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_IDENTIFICATION
-    value   : "en_US.UTF-8"
+    - name      : Setting Measurement Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_MEASUREMENT
+        value   : "en_US.UTF-8"
 
-- name      : Setting LC_ALL Locale to US English
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/locale
-    section : null
-    option  : LC_ALL
-    value   : en_US.UTF-8
+    - name      : Setting Identification Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_IDENTIFICATION
+        value   : "en_US.UTF-8"
 
-
-# Switch keyboards to US layout
-- name      : Setting Keyboard Locale to US
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/keyboard
-    section : null
-    option  : XKBLAYOUT
-    value   : "us"
-
-- name      : Setting Keyboard to 105-Key Model
-  become    : yes
-  ini_file  :
-    dest    : /etc/default/keyboard
-    section : null
-    option  : XKBMODEL
-    value   : "pc105"
+    - name      : Setting LC_ALL Locale to US English
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/locale
+        section : null
+        option  : LC_ALL
+        value   : en_US.UTF-8
 
 
-# Generation
-- name    : Finalizing Locales
-  become  : yes
-  command : locale-gen
+    # Switch keyboards to US layout
+    - name      : Setting Keyboard Locale to US
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/keyboard
+        section : null
+        option  : XKBLAYOUT
+        value   : "us"
+
+    - name      : Setting Keyboard to 105-Key Model
+      become    : yes
+      ini_file  :
+        dest    : /etc/default/keyboard
+        section : null
+        option  : XKBMODEL
+        value   : "pc105"
+
+
+    # Generation
+    - name    : Finalizing Locales
+      become  : yes
+      command : locale-gen
+
+  when : not skip_locales|default(retropie_defaults.skip_locales)

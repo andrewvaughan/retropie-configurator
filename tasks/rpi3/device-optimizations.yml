@@ -1,59 +1,67 @@
 # Optimizations for the Raspberry Pi 3
 ---
 
-# Overclocking
-- name      : Setting Overclock ARM Frequency
-  become    : yes
-  ini_file  :
-    dest    : /boot/config.txt
-    section : null
-    option  : arm_freq
-    value   : 1300
+- name  : Overclocking
+  block :
 
-- name      : Setting Overclock GPU Frequency
-  become    : yes
-  ini_file  :
-    dest    : /boot/config.txt
-    section : null
-    option  : gpu_freq
-    value   : 500
+    - name      : Setting Overclock ARM Frequency
+      become    : yes
+      ini_file  :
+        dest    : /boot/config.txt
+        section : null
+        option  : arm_freq
+        value   : 1300
 
-- name      : Setting Overclock SDRAM Frequency
-  become    : yes
-  ini_file  :
-    dest    : /boot/config.txt
-    section : null
-    option  : sdram_freq
-    value   : 500
+    - name      : Setting Overclock GPU Frequency
+      become    : yes
+      ini_file  :
+        dest    : /boot/config.txt
+        section : null
+        option  : gpu_freq
+        value   : 500
 
-- name      : Setting Overclock Over Voltage
-  become    : yes
-  ini_file  :
-    dest    : /boot/config.txt
-    section : null
-    option  : over_voltage
-    value   : 6
+    - name      : Setting Overclock SDRAM Frequency
+      become    : yes
+      ini_file  :
+        dest    : /boot/config.txt
+        section : null
+        option  : sdram_freq
+        value   : 500
 
-- name      : Setting Overclock V3D Frequency
-  become    : yes
-  ini_file  :
-    dest    : /boot/config.txt
-    section : null
-    option  : v3d_freq
-    value   : 525
+    - name      : Setting Overclock Over Voltage
+      become    : yes
+      ini_file  :
+        dest    : /boot/config.txt
+        section : null
+        option  : over_voltage
+        value   : 6
+
+    - name      : Setting Overclock V3D Frequency
+      become    : yes
+      ini_file  :
+        dest    : /boot/config.txt
+        section : null
+        option  : v3d_freq
+        value   : 525
+
+  when : not skip_overclocking|default(retropie_defaults.skip_overclocking)
 
 
-# CPU Governor
-- name      : Installing CPU Governor Controller
-  apt       :
-    name    : cpufrequtils
-    state   : latest
+- name  : CPU Governor
+  block :
 
-- name      : Setting CPU Governor to Performance Mode
-  become    : yes
-  copy      :
-    content : "GOVERNOR=\"performance\""
-    dest    : /etc/default/cpufrequtils
-    owner   : root
-    group   : root
-    mode    : u=rw,g=r,o=r
+    - name      : Installing CPU Governor Controller
+      apt       :
+        name    : cpufrequtils
+        state   : latest
+
+    - name      : Setting CPU Governor to Performance Mode
+      become    : yes
+      copy      :
+        content : "GOVERNOR=\"performance\""
+        dest    : /etc/default/cpufrequtils
+        owner   : root
+        group   : root
+        mode    : u=rw,g=r,o=r
+
+  when : not skip_cpu_governor|default(retropie_defaults.skip_cpu_governor)
