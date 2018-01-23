@@ -5,6 +5,7 @@
 retropie_defaults:
 
   skip_compatibility_check : false   # Skips device compatibility checks when true
+  no_reboot                : false   # Skips rebooting when the script is complete
 
   # Device Optimizations
   skip_overclocking        : false   # Skips CPU overclocking when true

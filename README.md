@@ -17,6 +17,9 @@ curl -s https://raw.githubusercontent.com/andrewvaughan/retropie-configurator/ma
 
 You may be asked for a password, which will be the password for your user (`raspberry` for default `pi` users).
 
+**Note** This script will reboot your device when it completes.  To prevent this, add the `--no-reboot` paramter
+at the end of the command.
+
 ### Options
 
 Several options exist to customize your experience.  Each of these options must be placed at the end of the command.
@@ -34,13 +37,14 @@ The following options exist for your use:
 | `-h`      | `--help`      | Prints usage instructions for the script                                |
 | `-d`      | `--debug`     | Prints debug statements during script execution                         |
 | `-v`      | `--verbose`   | Prints verbose debug statements during script execution                 |
-| `-u user` | `--user user` | Sets the user that is running RetroPie *(default: pi)*                  |
+| `-u USER` | `--user USER` | Sets the user that is running RetroPie *(default: pi)*                  |
 | `-c`      | `--clean`     | Cleans packages installed during execution<sup>†<?sup> *(default: off)* |
+|           | `--no-reboot` | Prevents rebooting when the script is completed                         |
 
 Additionally, a number of options are made available that allow you to skip any step of the configuration process:
 
 | Option                       | Result                                                              |
-|:----------------------------:|---------------------------------------------------------------------|
+|-----------------------------:|---------------------------------------------------------------------|
 | `--skip-compatibility-check` | Skips the device compatibility check at the beginning of the script |
 | `--skip-overclocking`        | Skips setting the overclock settings on the RaspberryPi             |
 | `--skip-cpu-governor`        | Skips setting the CPU governor on the RaspberryPi                   |

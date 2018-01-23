@@ -29,7 +29,7 @@ If you are requesting a game optimization, please delete the above and fill out 
 
 | Source | Setting | Notes|
 |:-------:|:------:|--------|
-| [Retropie N64 Compatibility Chart][chart-1] | `` | "" |
+| [RetroPie N64 Compatibility Chart][chart-1] | `` | "" |
 | [N64 Compatibility][chart-2] | `` | "" |
 
 [chart-1]: https://docs.google.com/spreadsheets/d/1Sn3Ks3Xv8cIx3-LGCozVFF7wGLagpVG0csWybnwFHXk/edit#gid=17446384

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION="0.0.0"
+
 BOLD="\e[1m"
 ITALIC="\e[3m"
 UNDERLINE="\e[4m"
@@ -7,11 +9,12 @@ RESET="\e[0m"
 BG_RED="\e[41m"
 BG_GREEN="\e[42m"
 BG_YELLOW="\e[43m"
+BG_BLUE="\e[44m"
 
 # Usage function for help and bad arguments
 usage() {
   echo -e ""
-  echo -e "${BOLD}${UNDERLINE}RetroPie Configurator${RESET}"
+  echo -e "${BOLD}${UNDERLINE}RetroPie Configurator v${VERSION}${RESET}"
   echo -e ""
   echo -e "  Configures a RetroPie installation for compatibility and"
   echo -e "  performance."
@@ -32,14 +35,16 @@ usage() {
   echo -e ""
   echo -e "${BOLD}${UNDERLINE}Usage${RESET}"
   echo -e ""
-  echo -e "  configurator [-h] [-d] [-v] [-u user] [-c]"
+  echo -e "  configurator [OPTIONS]"
   echo -e ""
   echo -e "${BOLD}${UNDERLINE}Options${RESET}"
   echo -e ""
-  echo -e "  -h, --help        Prints usage guidelines and help."
+  echo -e "  -h, --help        Prints usage guidelines and help"
+  echo -e "      --version     Prints the Configurator version and exits"
   echo -e "  -d, --debug       Turns on debugging messages"
   echo -e "  -v, --verbose     Turns on verbose debugging messages; implies -d"
   echo -e "  -u, --user USER   Sets the user that is running RetroPie (default: pi)"
+  echo -e "      --no-reboot   Prevents the script from rebooting the device when complete"
   echo -e ""
   echo -e "${BOLD}${UNDERLINE}Section Skipping${RESET}"
   echo -e "  "
@@ -110,6 +115,13 @@ while [ "$1" != "" ]; do
                      OPT_USER=$1
                      ;;
 
+    --no-reboot )    OPT_SKIPS="${OPT_SKIPS} no_reboot=true"
+                     ;;
+
+    --version )      echo "RetroPie Configurator v${VERSION}"
+                     exit
+                     ;;
+
     -h | --help )    usage
                      exit
                      ;;
@@ -140,6 +152,10 @@ while [ "$1" != "" ]; do
     shift
 done
 
+
+echo ""
+println "RetroPie Configurator v${VERSION}" "${BOLD}${UNDERLINE}${BG_BLUE}"
+echo ""
 
 # Ensure the script is being run as root
 debug "Checking that script is being run as root"
