@@ -24,7 +24,8 @@
     - import_tasks : tasks/config/n64-retrolink-controllers.yml
 
 
-    # Remind user to reboot if in debug mode
-    - name  : Reboot
-      debug :
-        msg : Don't forget to reboot your RaspberryPi!
+    # Reboot to lock in changes
+    - name    : Rebooting RetroPie... then you're done!
+      become  : yes
+      command : reboot
+      when    : not no_reboot|default(retropie_defaults.no_reboot)
