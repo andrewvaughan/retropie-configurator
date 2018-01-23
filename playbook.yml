@@ -8,3 +8,8 @@
 
       # Optimizations
       - import_tasks : tasks/rpi3/device-optimizations.yml
+
+      # Remind user to reboot if in debug mode
+      - name  : Reboot
+        debug :
+          msg : Don't forget to reboot your RaspberryPi!
