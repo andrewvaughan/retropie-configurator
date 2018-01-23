@@ -8,6 +8,7 @@
       - import_tasks : tasks/device-check.yml
 
       # Installation and Configuration
+      - import_tasks : tasks/raspbian/packages.yml
       - import_tasks : tasks/raspbian/locale.yml
 
       # Optimizations
