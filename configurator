@@ -41,6 +41,15 @@ usage() {
   echo -e "  -v, --verbose     Turns on verbose debugging messages; implies -d"
   echo -e "  -u, --user USER   Sets the user that is running RetroPie (default: pi)"
   echo -e ""
+  echo -e "${BOLD}${UNDERLINE}Section Skipping${RESET}"
+  echo -e "  "
+  echo -e "  --skip-compatibility-check   Skips the device compatibility check at the beginning of the script"
+  echo -e "  --skip-overclocking          Skips setting the overclock settings on the RaspberryPi"
+  echo -e "  --skip-cpu-governor          Skips setting the CPU governor on the RaspberryPi"
+  echo -e "  --skip-os-packages           Skips updating and upgrading Raspbian distribution packages"
+  echo -e "  --skip-locales               Skips setting the locales and keyboard to US UTF-8"
+  echo -e "  --skip-retroarch             Skips optimizing RetroArch emulators"
+  echo -e ""
 }
 
 println() {
@@ -81,6 +90,7 @@ debug() {
 OPT_DEBUG=0           # Debugging flags
 OPT_VERBOSE=0
 OPT_USER="pi"         # The user that runs RetroPie (Default: pi)
+OPT_SKIPS=""          # Sections to skip during the run
 
 # Parse any arguments
 while [ "$1" != "" ]; do
@@ -100,6 +110,20 @@ while [ "$1" != "" ]; do
     -h | --help )    usage
                      exit
                      ;;
+
+    --skip-compatibility-check ) OPT_SKIPS="${OPT_SKIPS} skip_compatibility_check=true"
+                                 ;;
+    --skip-overclocking )        OPT_SKIPS="${OPT_SKIPS} skip_overclocking=true"
+                                 ;;
+    --skip-cpu-governor )        OPT_SKIPS="${OPT_SKIPS} skip_cpu_governor=true"
+                                 ;;
+    --skip-os-packages )         OPT_SKIPS="${OPT_SKIPS} skip_os_packages=true"
+                                 ;;
+    --skip-locales )             OPT_SKIPS="${OPT_SKIPS} skip_locales=true"
+                                 ;;
+    --skip-retroarch )           OPT_SKIPS="${OPT_SKIPS} skip_retroarch=true"
+                                 ;;
+
 
     * )              usage
                      exit 1

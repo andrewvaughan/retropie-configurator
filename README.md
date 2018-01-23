@@ -37,6 +37,17 @@ The following options exist for your use:
 | `-u user` | `--user user` | Sets the user that is running RetroPie *(default: pi)*                  |
 | `-c`      | `--clean`     | Cleans packages installed during execution<sup>†<?sup> *(default: off)* |
 
+Additionally, a number of options are made available that allow you to skip any step of the configuration process:
+
+| Option                       | Result                                                              |
+|:----------------------------:|---------------------------------------------------------------------|
+| `--skip-compatibility-check` | Skips the device compatibility check at the beginning of the script |
+| `--skip-overclocking`        | Skips setting the overclock settings on the RaspberryPi             |
+| `--skip-cpu-governor`        | Skips setting the CPU governor on the RaspberryPi                   |
+| `--skip-os-packages`         | Skips updating and upgrading Raspbian distribution packages         |
+| `--skip-locales`             | Skips setting the locales and keyboard to US UTF-8                  |
+| `--skip-retroarch`           | Skips optimizing RetroArch emulators                                |
+
 ## Release Policy
 
 Releases of Redshift follow [Semantic Versioning][semver-url] standards in a `MAJOR.MINOR.PATCH` versioning
