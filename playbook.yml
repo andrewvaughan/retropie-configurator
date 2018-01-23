@@ -4,10 +4,15 @@
 
   tasks:
 
+      # Check that this is a supported device
       - import_tasks : tasks/device-check.yml
+
+      # Installation and Configuration
+      - import_tasks : tasks/raspbian/locale.yml
 
       # Optimizations
       - import_tasks : tasks/rpi3/device-optimizations.yml
+
 
       # Remind user to reboot if in debug mode
       - name  : Reboot
