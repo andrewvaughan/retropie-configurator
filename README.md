@@ -158,6 +158,5 @@ SOFTWARE.
 [changelog]:      https://github.com/andrewvaughan/retropie-configurator/blob/master/CHANGELOG.md
 
 [ssh-help]:       https://github.com/RetroPie/RetroPie-Setup/wiki/ssh
-
 [semver-url]:     http://semver.org/
 [retropie]:       https://retropie.org.uk/
