@@ -51,6 +51,7 @@ usage() {
   echo -e "  --skip-retroarch             Skips optimizing RetroArch emulators"
   echo -e "  --skip-n64-rice              Skips optimizing the Rice N64 emulator"
   echo -e "  --skip-n64-glide             Skips optimizing the Glide N64 emulator"
+  echo -e "  --skip-n64-retrolink         Skips fixing mapping for N64 Retrolink controllers"
   echo -e ""
 }
 
@@ -129,7 +130,8 @@ while [ "$1" != "" ]; do
                                   ;;
     --skip-n64-glide )            OPT_SKIPS="${OPT_SKIPS} skip_n64_glide=true"
                                   ;;
-
+    --skip-n64-retrolink )        OPT_SKIPS="${OPT_SKIPS} skip_n64_retrolink=true"
+                                  ;;
 
     * ) usage
         exit 1

@@ -1,0 +1,147 @@
+# Optimizations specific to the Rice N64 emulator
+---
+
+- name  : Retrolink N64 Controller
+  block :
+
+    - name      : Setting Analog Deadzone for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : AnalogDeadzone
+        value   : 4096,4096
+
+    - name      : Setting Analog Maximum for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : AnalogPeak
+        value   : 32768,32768
+
+    - name      : Clearing Mempack Trigger for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : Mempak switch
+        value   : ""
+
+    - name      : Clearing Rumblepack Trigger for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : Rumblepak switch
+        value   : ""
+
+    - name      : Mapping D-Pad Up for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : DPad U
+        value   : hat(0 Up)
+
+    - name      : Mapping D-Pad Down for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : DPad D
+        value   : hat(0 Down)
+
+    - name      : Mapping D-Pad Left for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : DPad L
+        value   : hat(0 Left)
+
+    - name      : Mapping D-Pad Right for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : DPad R
+        value   : hat(0 Right)
+
+    - name      : Mapping Analog X-Axis for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : X Axis
+        value   : axis(0-,0+)
+
+    - name      : Mapping Analog Y-Axis for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : Y Axis
+        value   : axis(1-,1+)
+
+    - name      : Mapping C-Up for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : C Button U
+        value   : button(0)
+
+    - name      : Mapping C-Down for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : C Button D
+        value   : button(2)
+
+    - name      : Mapping C-Left for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : C Button L
+        value   : button(3)
+
+    - name      : Mapping C-Right for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : C Button R
+        value   : button(1)
+
+    - name      : Mapping Left Shoulder for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : L Trig
+        value   : button(4)
+
+    - name      : Mapping Right Shoulder for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : R Trig
+        value   : button(5)
+
+    - name      : Mapping Z Trigger for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : Z Trig
+        value   : button(7)
+
+    - name      : Mapping A Button for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : A Button
+        value   : button(6)
+
+    - name      : Mapping B Button for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : B Button
+        value   : button(8)
+
+    - name      : Mapping Start Button for Retrolink N64 Controller
+      ini_file  :
+        dest    : /opt/retropie/configs/n64/InputAutoCfg.ini
+        section : "Generic   USB  Joystick  "
+        option  : Start
+        value   : button(9)
+
+  when : not skip_n64_retrolink|default(retropie_defaults.skip_n64_retrolink)
