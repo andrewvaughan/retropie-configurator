@@ -1,11 +1,14 @@
 # RetroPie Configurator
 
+[![Version][version-image]][version-url]
+[![License][license-image]][license-url]
+
 This script will configure a standard [RetroPie][retropie] installation to performant settings as they are discovered.
 
 This project is in no way related to the RetroPie creators or organization.  It is intended for personal use only.
 
 > **This script can cause irreparable damage to both your RaspberryPi and RetroPie configuration.**  No warranty or
-> liability is provided of any kind.  Please refer to the [project license][project-license] before continuing.
+> liability is provided of any kind.  Please refer to the [project license][license-url] before continuing.
 
 ## Usage
 
@@ -67,7 +70,7 @@ scheme of the following format:
 
 ## License
 
-This project is licensed via the [MIT License][project-license]:
+This project is licensed via the [MIT License][license-url]:
 
 ```
 MIT License
@@ -94,6 +97,10 @@ SOFTWARE.
 ```
 
 
-[project-license]: https://github.com/andrewvaughan/retropie-configurator/blob/master/LICENSE
-[semver-url]:      http://semver.org/
-[retropie]:        https://retropie.org.uk/
+[version-image]:  http://img.shields.io/badge/release-0.1.0-blue.svg?style=flat
+[version-url]:    https://github.com/andrewvaughan/retropie-configurator/releases
+[license-image]:  http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]:    https://github.com/andrewvaughan/retropie-configurator/blob/master/LICENSE
+
+[semver-url]:     http://semver.org/
+[retropie]:       https://retropie.org.uk/
