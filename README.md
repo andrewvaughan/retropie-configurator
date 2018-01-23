@@ -49,6 +49,7 @@ Additionally, a number of options are made available that allow you to skip any 
 | `--skip-retroarch`           | Skips optimizing RetroArch emulators                                |
 | `--skip-n64-rice`            | Skips optimizing the Rice N64 emulator                              |
 | `--skip-n64-glide`           | Skips optimizing the Glide N64 emulator                             |
+| `--skip_n64_retrolink`       | Skips configuring Retrolink N64 controllers                         |
 
 ## Release Policy
 

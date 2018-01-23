@@ -20,6 +20,9 @@
     - import_tasks : tasks/rpi3/rice-optimizations.yml
     - import_tasks : tasks/rpi3/glide-optimizations.yml
 
+    # Configurations
+    - import_tasks : tasks/config/n64-retrolink-controllers.yml
+
 
     # Remind user to reboot if in debug mode
     - name  : Reboot
