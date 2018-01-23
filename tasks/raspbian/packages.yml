@@ -1,0 +1,14 @@
+# Manages packages needed for Raspbian
+---
+
+# Update and Upgrade Platform
+- name           : Updating Operating System Packages
+  become         : yes
+  apt            :
+    upgrade      : dist
+    update_cache : yes
+
+- name         : Removing Old Package Dependencies
+  become       : yes
+  apt          :
+    autoremove : yes
