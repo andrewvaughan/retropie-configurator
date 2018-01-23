@@ -1,21 +1,26 @@
 # Checks for device compatibility
 ---
-- name     : Checking Device File
-  stat     :
-    path   : /proc/device-tree/model
-  register : device_proc
+- name  : Device Compatibility
+  block :
 
-- name  : Device File Checkpoint
-  fail  :
-    msg : Could not load device tree model to confirm device. Exiting.
-  when  : not device_proc.stat.rusr
+    - name     : Checking for Device Tree File
+      stat     :
+        path   : /proc/device-tree/model
+      register : device_proc
 
-- name           : Gathering Device Model Name
-  set_fact       :
-    device_model : "{{ lookup('file', '/proc/device-tree/model') }}"
-    cacheable    : true
+    - name  : Device Tree File Checkpoint
+      fail  :
+        msg : Could not load device tree model to confirm device. Exiting.
+      when  : not device_proc.stat.rusr
 
-- name  : Device Model Checkpoint
-  fail  :
-    msg : "This script is not compatible with any system other than the Raspberry Pi 3 (Current: '{{ device_model }}')"
-  when  : "'Raspberry Pi 3' not in device_model"
+    - name           : Gathering Device Model Name
+      set_fact       :
+        device_model : "{{ lookup('file', '/proc/device-tree/model') }}"
+        cacheable    : true
+
+    - name  : Compatibility Checkpoint
+      fail  :
+        msg : "This script is not compatible with any system other than the Raspberry Pi 3 (Current: '{{ device_model }}')"
+      when  : "'Raspberry Pi 3' not in device_model"
+
+  when : not skip_compatibility_check|default(retropie_defaults.skip_compatibility_check)

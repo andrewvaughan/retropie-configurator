@@ -1,0 +1,18 @@
+# Default variables for the configurator
+#
+# These can be overridden when running this playbook either on the command line or in a custom var file.
+---
+retropie_defaults:
+
+  skip_compatibility_check : false   # Skips device compatibility checks when true
+
+  # Device Optimizations
+  skip_overclocking        : false   # Skips CPU overclocking when true
+  skip_cpu_governor        : false   # Skips CPU governor modification when true
+
+  # Operating System
+  skip_os_packages         : false   # Skips updating Operating System packages when true
+  skip_locales             : false   # Skips setting US locaes when true
+
+  # Optimization Groups
+  skip_retroarch           : false   # Skips RetroArch optimizations when true

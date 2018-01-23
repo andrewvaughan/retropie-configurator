@@ -1,14 +1,18 @@
 # Manages packages needed for Raspbian
 ---
 
-# Update and Upgrade Platform
-- name           : Updating Operating System Packages
-  become         : yes
-  apt            :
-    upgrade      : dist
-    update_cache : yes
+- name  : Operating System Packages
+  block :
 
-- name         : Removing Old Package Dependencies
-  become       : yes
-  apt          :
-    autoremove : yes
+    - name           : Updating Operating System Packages
+      become         : yes
+      apt            :
+        upgrade      : dist
+        update_cache : yes
+
+    - name         : Removing Old Package Dependencies
+      become       : yes
+      apt          :
+        autoremove : yes
+
+  when : not skip_os_packages|default(retropie_defaults.skip_os_packages)
