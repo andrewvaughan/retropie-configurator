@@ -50,6 +50,7 @@ usage() {
   echo -e "  --skip-locales               Skips setting the locales and keyboard to US UTF-8"
   echo -e "  --skip-retroarch             Skips optimizing RetroArch emulators"
   echo -e "  --skip-n64-rice              Skips optimizing the Rice N64 emulator"
+  echo -e "  --skip-n64-glide             Skips optimizing the Glide N64 emulator"
   echo -e ""
 }
 
@@ -112,23 +113,26 @@ while [ "$1" != "" ]; do
                      exit
                      ;;
 
-    --skip-compatibility-check ) OPT_SKIPS="${OPT_SKIPS} skip_compatibility_check=true"
-                                 ;;
-    --skip-overclocking )        OPT_SKIPS="${OPT_SKIPS} skip_overclocking=true"
-                                 ;;
-    --skip-cpu-governor )        OPT_SKIPS="${OPT_SKIPS} skip_cpu_governor=true"
-                                 ;;
-    --skip-os-packages )         OPT_SKIPS="${OPT_SKIPS} skip_os_packages=true"
-                                 ;;
-    --skip-locales )             OPT_SKIPS="${OPT_SKIPS} skip_locales=true"
-                                 ;;
-    --skip-retroarch )           OPT_SKIPS="${OPT_SKIPS} skip_retroarch=true"
-                                 ;;
-    --skip-n64-rice )            OPT_SKIPS="${OPT_SKIPS} skip_n64_rice=true"
-                                ;;
+    --skip-compatibility-check )  OPT_SKIPS="${OPT_SKIPS} skip_compatibility_check=true"
+                                  ;;
+    --skip-overclocking )         OPT_SKIPS="${OPT_SKIPS} skip_overclocking=true"
+                                  ;;
+    --skip-cpu-governor )         OPT_SKIPS="${OPT_SKIPS} skip_cpu_governor=true"
+                                  ;;
+    --skip-os-packages )          OPT_SKIPS="${OPT_SKIPS} skip_os_packages=true"
+                                  ;;
+    --skip-locales )              OPT_SKIPS="${OPT_SKIPS} skip_locales=true"
+                                  ;;
+    --skip-retroarch )            OPT_SKIPS="${OPT_SKIPS} skip_retroarch=true"
+                                  ;;
+    --skip-n64-rice )             OPT_SKIPS="${OPT_SKIPS} skip_n64_rice=true"
+                                  ;;
+    --skip-n64-glide )            OPT_SKIPS="${OPT_SKIPS} skip_n64_glide=true"
+                                  ;;
 
-    * )              usage
-                     exit 1
+
+    * ) usage
+        exit 1
 
     esac
     shift
