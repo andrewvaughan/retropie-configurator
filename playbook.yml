@@ -17,6 +17,7 @@
     # Optimizations
     - import_tasks : tasks/rpi3/device-optimizations.yml
     - import_tasks : tasks/rpi3/retroarch-optimizations.yml
+    - import_tasks : tasks/rpi3/rice-optimizations.yml
 
 
     # Remind user to reboot if in debug mode
