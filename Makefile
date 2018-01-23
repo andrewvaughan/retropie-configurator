@@ -2,10 +2,10 @@ all:
 	./configurator
 
 playbook:
-	ansible-playbook --ask-become-pass playbook.yml
+	ansible-playbook -K playbook.yml
 
 debug-playbook:
-	ansible-playbook -v --ask-become-pass playbook.yml
+	ansible-playbook -vvv -K playbook.yml
 
 test: dependencies
 	# @TODO - run docker retropie test

@@ -1,7 +1,9 @@
 # Optimizations for the Raspberry Pi 3
 ---
+
+# Overclocking
 - name      : Setting Overclock ARM Frequency
-  become    : true
+  become    : yes
   ini_file  :
     dest    : /boot/config.txt
     section : null
@@ -9,7 +11,7 @@
     value   : 1300
 
 - name      : Setting Overclock GPU Frequency
-  become    : true
+  become    : yes
   ini_file  :
     dest    : /boot/config.txt
     section : null
@@ -17,7 +19,7 @@
     value   : 500
 
 - name      : Setting Overclock SDRAM Frequency
-  become    : true
+  become    : yes
   ini_file  :
     dest    : /boot/config.txt
     section : null
@@ -25,7 +27,7 @@
     value   : 500
 
 - name      : Setting Overclock Over Voltage
-  become    : true
+  become    : yes
   ini_file  :
     dest    : /boot/config.txt
     section : null
@@ -33,9 +35,25 @@
     value   : 6
 
 - name      : Setting Overclock V3D Frequency
-  become    : true
+  become    : yes
   ini_file  :
     dest    : /boot/config.txt
     section : null
     option  : v3d_freq
     value   : 525
+
+
+# CPU Governor
+- name      : Installing CPU Governor Controller
+  apt       :
+    name    : cpufrequtils
+    state   : latest
+
+- name      : Setting CPU Governor to Performance Mode
+  become    : yes
+  copy      :
+    content : "GOVERNOR=\"performance\""
+    dest    : /etc/default/cpufrequtils
+    owner   : root
+    group   : root
+    mode    : u=rw,g=r,o=r
